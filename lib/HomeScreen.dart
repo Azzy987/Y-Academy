@@ -9,9 +9,9 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-int selected_page = 0;
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selected_page = 0;
 
   final _pageOptions = [
     HomePage(),
@@ -20,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Feed()
   ];
 
+  void onTap(int idx) => setState(() => selected_page = idx); 
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           currentIndex: selected_page,
          ),*/
-          CustomBottomNavigation(),
+          CustomBottomNavigation(onTap: onTap),
           body: _pageOptions[selected_page],
         ),
       ),
@@ -51,6 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class CustomBottomNavigation extends StatefulWidget {
+  const CustomBottomNavigation({this.onTap}): super();
+  
+  final ValueSetter<int> onTap;
+  
   @override
   _CustomBottomNavigationState createState() => _CustomBottomNavigationState();
 }
@@ -116,7 +122,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: items.map((item) {
           var itemIndex = items.indexOf(item);
-          return (
+          return GestureDetector(
             onTap: () {
               /*switch(itemIndex){
                 case 0 : return Navigator.of(context).push(MaterialPageRoute(builder: (context){
@@ -127,9 +133,9 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                 }));
 
               }*/
+              widget.onTap(itemIndex);
               setState(() {
                 selectedIndex = itemIndex;
-                selected_page = itemIndex;
               });
             },
             child: _buildItem(item, selectedIndex == itemIndex),
