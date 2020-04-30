@@ -123,11 +123,11 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(width: 4,),
                     InkWell(
                       onTap: (){
-                        /*Navigator.push(context, MaterialPageRoute(builder: (context){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
                           return RegistrationScreen();
-                        }));*/
-                        final snackbar = SnackBar(content: Text('Login Successful'));
-                        Scaffold.of(context).showSnackBar(snackbar);
+                        }));
+                       /* final snackbar = SnackBar(content: Text('Login Successful'));
+                        Scaffold.of(context).showSnackBar(snackbar);*/
                       },
                       child: Text(
                         'Signup',

@@ -116,7 +116,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: items.map((item) {
           var itemIndex = items.indexOf(item);
-          return GestureDetector(
+          return (
             onTap: () {
               /*switch(itemIndex){
                 case 0 : return Navigator.of(context).push(MaterialPageRoute(builder: (context){
