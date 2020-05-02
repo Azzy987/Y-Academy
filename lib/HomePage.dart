@@ -12,6 +12,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
+    // With this 2 variables you can set the course layout.
+    // You can always insert a SidedBox between lesson's and
+    // author's name but this feels better to me.
+    MainAxisAlignment courseContentAlignment = MainAxisAlignment.spaceBetween;
+    double courseContentHeight = 350;
+
     return  Scaffold(
       backgroundColor: Colors.white,
       endDrawer: Drawer(
@@ -52,10 +59,7 @@ class _HomePageState extends State<HomePage> {
       key: _globalKey,
       body: SafeArea(
         child: Material(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: ListView(
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(left: 24, top: 24),
@@ -110,11 +114,12 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                 ),
               ),
-              Flexible(
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Row(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                    height: courseContentHeight,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                           width: 260,
@@ -126,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: courseContentAlignment,
                             children: <Widget>[
                               ClipRRect(
                                 child: Image.network(
@@ -197,6 +202,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: courseContentAlignment,
                             children: <Widget>[
                               ClipRRect(
                                 child: Image.network(
@@ -264,12 +270,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+              
               ),
-              Expanded(
-                child: Container(),
-              )
+              // Expanded and scroll views are not a good mix. Removed.
+              // This height is just for sample purposes. It can be modified.
+              Container(height: 150),
             ],
           ),
         ),
