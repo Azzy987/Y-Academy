@@ -89,16 +89,18 @@ class _HomePageState extends State<HomePage> {
                             ClipOval(
                               child: Image.asset('images/profile.png',width: 40,height: 40,),
                             ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.menu,
-                                color: accentColor,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  Scaffold.of(context).openEndDrawer();
-                                });
-                              },
+                            Builder(
+                              builder: (context) {
+                                return IconButton(
+                                  icon: Icon(
+                                    Icons.menu,
+                                    color: accentColor,
+                                  ),
+                                  onPressed: () {
+                                    Scaffold.of(context).openEndDrawer();
+                                  },
+                                );
+                              }
                             ),
                           ],
                         ),
