@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yacademy/SavedPage.dart';
+import 'package:yacademy/Settings.dart';
 import 'package:yacademy/colors.dart';
 import 'package:yacademy/HomePage.dart';
 import 'package:yacademy/Feed.dart';
@@ -9,16 +10,17 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-int selected_page = 0;
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selected_page = 0;
 
   final _pageOptions = [
     HomePage(),
     Feed(),
     SavedPage(),
-    Feed()
+    Settings()
   ];
+  void onTap(int idx) => setState(() => selected_page = idx);
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
-          bottomNavigationBar: /*BottomNavigationBar(items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home),title: Text('Home'),backgroundColor: accentColor),
-            BottomNavigationBarItem(icon: Icon(Icons.trending_up),title: Text('Feed')),
-            BottomNavigationBarItem(icon: Icon(Icons.bookmark_border),title: Text('Saved')),
-            BottomNavigationBarItem(icon: Icon(Icons.settings),title: Text('Setting')),
-          ],
-          onTap: (int index){
-            setState(() {
-              selected_page = index;
-            });
-          },
-          currentIndex: selected_page,
-         ),*/
-          CustomBottomNavigation(),
+          bottomNavigationBar: CustomBottomNavigation(onTap: onTap),
           body: _pageOptions[selected_page],
         ),
       ),
@@ -51,12 +40,21 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class CustomBottomNavigation extends StatefulWidget {
+
+  CustomBottomNavigation({this.onTap});
+
+  final ValueSetter<int> onTap;
+
+
   @override
   _CustomBottomNavigationState createState() => _CustomBottomNavigationState();
 }
-int selectedIndex = 0;
+    int selectedIndex = 0;
+
 
 class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
+
+  int index = 0;
 
   List<NavigationItem> items = [
     NavigationItem(Icon(Icons.dashboard), Text('Home')),
@@ -102,12 +100,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black38,
-                blurRadius: 1
-            )
-          ]
+
       ),
       padding: EdgeInsets.only(left: 8,right: 8,top: 4,bottom: 4),
       width: MediaQuery.of(context).size.width,
@@ -116,7 +109,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: items.map((item) {
           var itemIndex = items.indexOf(item);
-          return (
+          return GestureDetector(
             onTap: () {
               /*switch(itemIndex){
                 case 0 : return Navigator.of(context).push(MaterialPageRoute(builder: (context){
@@ -127,12 +120,12 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                 }));
 
               }*/
+              widget.onTap(itemIndex);
               setState(() {
-                selectedIndex = itemIndex;
-                selected_page = itemIndex;
+                index = itemIndex;
               });
             },
-            child: _buildItem(item, selectedIndex == itemIndex),
+            child: _buildItem(item, index == itemIndex),
           );
         }).toList(),
       ),

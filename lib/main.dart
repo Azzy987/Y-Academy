@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-     theme: ThemeData(
+      theme: ThemeData(
        fontFamily: 'Brandon',
+       primaryColor: Colors.white,
        backgroundColor: Colors.white,
      ),
      /* locale: DevicePreview.of(context).locale, // <--- Add the locale
