@@ -6,12 +6,14 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
+  double xOffset = 0;
+  double yOffset = 0;
+  double scaleFactor = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Hello feed'),
-      ),
+    return Center(
+      child: Text('Hello feed'),
     );
   }
 }

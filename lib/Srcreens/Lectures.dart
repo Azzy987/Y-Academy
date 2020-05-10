@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yacademy/SizeConfig.dart';
 
 class Lectures extends StatefulWidget {
   @override
@@ -23,21 +24,26 @@ class _LecturesState extends State<Lectures> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 24, top: 16, bottom: 8),
+              padding: EdgeInsets.only(
+                  left: SizeConfig.actualwidth * 16,
+                  right: SizeConfig.actualwidth * 24,
+                  top: SizeConfig.actualHeight * 16,
+                  bottom: SizeConfig.actualHeight * 8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     'Section 1 -Introduction',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: SizeConfig.actualHeight * 18),
                   ),
                   SvgPicture.asset(
                     'assets/icons/download.svg',
                     width: 24,
                     height: 24,
-                    color: Colors.grey
-                    ,
+                    color: Colors.grey,
                   )
                 ],
               ),
@@ -47,8 +53,11 @@ class _LecturesState extends State<Lectures> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, i) {
                   return Padding(
-                    padding:
-                        EdgeInsets.only(left: 16, right: 24, top: 12, bottom: 12),
+                    padding: EdgeInsets.only(
+                        left: SizeConfig.actualwidth * 16,
+                        right: SizeConfig.actualwidth * 24,
+                        top: SizeConfig.actualHeight * 12,
+                        bottom: SizeConfig.actualHeight * 12),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,21 +65,22 @@ class _LecturesState extends State<Lectures> {
                         Text(
                           lectures[i].index.toString(),
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
+                              fontSize: SizeConfig.actualHeight * 18,
+                              fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(width: 20),
+                        SizedBox(width: SizeConfig.actualwidth * 20),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
                               lectures[i].lectureName,
                               style: TextStyle(
-                                  fontWeight: FontWeight.w100, fontSize: 14),
+                                  fontWeight: FontWeight.w100, fontSize: SizeConfig.actualHeight*14),
                             ),
                             Text(
                               lectures[i].lectureCategory,
                               style: TextStyle(
-                                  fontSize: 11, fontWeight: FontWeight.w100),
+                                  fontSize: SizeConfig.actualHeight*11, fontWeight: FontWeight.w100),
                             ),
                           ],
                         ),
